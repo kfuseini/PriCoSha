@@ -1,0 +1,98 @@
+<html>
+<head>
+
+<script type="text/javascript">
+tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+function GetClock(){
+var d=new Date();
+var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getFullYear();
+var nhour=d.getHours(),nmin=d.getMinutes(),ap;
+if(nhour==0){ap=" AM";nhour=12;}
+else if(nhour<12){ap=" AM";}
+else if(nhour==12){ap=" PM";}
+else if(nhour>12){ap=" PM";nhour-=12;}
+if(nmin<=9) nmin="0"+nmin;
+document.getElementById('clockbox').innerHTML=""+tday[nday]+", "+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+ap+"";
+}
+window.onload=function(){
+GetClock();
+setInterval(GetClock,1000);
+}
+</script>
+<div id="clockbox"></div>
+
+</head>
+<body>
+<body action="/post" method="POST">
+	<h1>Welcome {{username}}</h1>
+	<h3>Birthday Reminder（{{count}}）: {{name}}</h3>
+	<h4>{{birthday}}</h4>
+	<h4><a href="/view_tags">View your tags</a></h4>
+
+
+<form action="/post" method="POST">
+	<h3>Post</h3>
+	<input type="text" name = "title" placeholder="title" required/> </br>
+	<input type="text" name = "link" placeholder="link" optional/> </br>
+	<input type="radio" name="status" value=1>public <br>
+  	<input type="radio" name="status" value=0>private <br>
+	<input type="submit" value = post />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+<div>
+    <form action="/search-a-friend" method="post">
+        <input type="text" name="friend" style="width: 200px;" placeholder="Search for a friend by username">
+		<input type = "submit" value="search">
+    </form>
+    <form action="/view_friends" method="get">
+        <input type="submit" value="My Friends">
+    </form>
+    <form action="/load-requests" method="get">
+        <input type="submit" value="Friend Requests">
+    </form>
+	<form action="/view_friend_groups" method="get">
+        <input type="submit" value="My Friend Groups">
+    </form>
+</div>
+<form action="/createGroup" method="get">
+	<input type="submit" value="Create Group">
+</form>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+<table>
+	<th>Time</th>
+	<th>username</th>>
+	<th>file_path</th>
+	<th>post</th>
+	<th>View</th>
+	<th>Delete</th>
+	<th>Share</th>
+{% for line in posts %}
+	<tr>
+		<td>{{line.timest}}</td>
+		<td>{{line.username}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.content_name}}</td>
+		<td><a href = "/comment/{{line.id}}">View</a></td>
+		<td><a href="/delete_post/{{line.id}}" >Delete</a></td>
+		<td><a href="/share/{{line.id}}" >Share</a></td>
+
+</form>
+
+	</tr>
+{% endfor %}
+</table>
+
+<a href="/logout">Logout</a>
+
+</body>
+</html>

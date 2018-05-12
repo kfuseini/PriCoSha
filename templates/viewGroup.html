@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{group}}</title>
+</head>
+<body>
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+<h1>{{group}}</h1>
+<table>
+	<th>Time</th>
+	<th>username</th>>
+	<th>file_path</th>
+	<th>post</th>
+	<th>View</th>
+	<th>Delete</th>
+{% for line in posts %}
+	<tr>
+		<td>{{line.timest}}</td>
+		<td>{{line.username}}</td>
+		<td>{{line.file_path}}</td>
+		<td>{{line.content_name}}</td>
+		<td><a href = "/comment/{{line.id}}">View</a></td>
+		<td><a href="/delete_post/{{line.id}}" >Delete</a></td>
+    </tr>
+    {%endfor%}
+</table>
+
+</body>
+</html>

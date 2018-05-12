@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table>
+    {% for friend in friends %}
+
+        <tr>
+            <td>{{friend}}</td>
+            <form action="/defriend/{{friend}}">
+            <td><input type="submit" value="defriend"></td>
+            </form>
+            {% if error %}
+		    <p class="error"><strong>Error:</strong> {{error}}</p>
+	        {% endif %}
+
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock%}

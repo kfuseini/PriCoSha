@@ -1,0 +1,50 @@
+<html>
+<head>
+</head>
+<body>
+<h1>{{name}}</h1>
+
+<style type="text/css">
+  table, th, td{
+    border: 1px solid black;
+  }
+</style>
+
+<h2>Pending Tags</h2>
+<table>
+  <th>Post</th>
+  <th>Tagger</th>
+  <th>Approve</th>
+
+{% for tag in tags %}
+  {% if not tag.status %}
+    <tr>
+      <td><a href="/comment/{{tag.id}}">{{tag.content_name}}</a></td>
+      <td>{{tag.username_tagger}}</td>
+      <td><a href="/approve/{{tag.id}}/{{tag.username_tagger}}">Approve</a></td>
+    </tr>
+  {% endif %}
+{% endfor %}
+</table>
+
+<h2>Approved Tags</h2>
+<table>
+  <th>Post</th>
+  <th>Tagger</th>
+
+{% for tag in tags %}
+  {% if tag.status %}
+  <tr>
+    <td><a href="/comment/{{tag.id}}">{{tag.content_name}}</a></td>
+    <td>{{tag.username_tagger}}</td>
+  </tr>
+  {% endif %}
+{% endfor %}
+</table>
+
+<a href="/home">Go back</a>
+
+</body>
+
+
+</html>

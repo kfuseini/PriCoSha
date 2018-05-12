@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table>
+	{% for user in requests %}
+	<tr>
+		<td>{{ user.username_requester}}</td>
+
+		<td>
+            <form action="/respond_to_request/{{user.username_requester}}" method="POST">
+                <button id='accept' name ='status' value =1 style="color: green">accept</button>
+                <button id='decline' name='status' value =-1 style="color: red">decline</button> <br>
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+		</td>
+	</tr>
+
+	</div>
+	{% endfor %}
+</table>
+{% endblock %}

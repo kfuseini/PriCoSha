@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Invite Friends to your group <em>{{group_name}}</em></h3>
+
+<form action="/search-friend-to-invite/{{group_name}}" method="post">
+    <label>Enter Friend's Username: <input type="text" name="friend"><input type="submit"></label>
+</form><br>
+
+{{data | safe}}
+
+<p><Strong>Your Friends:</Strong></p>
+<table>
+        {% for friend in friends %}
+        <form action="/invite-friends/{{friend}}/{{group_name}}"> 
+        <tr>
+            <td>{{friend}}</td>
+            <td><input type="submit" value="add"></td>
+        </tr>
+        </form>
+        {% endfor %}
+</table>
+
+{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+{% endif %}
+
+{% endblock %}

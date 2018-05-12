@@ -1,0 +1,26 @@
+{% if error %}
+				<p class="error"><strong>Error:</strong> {{error}}</p>
+{% endif %}
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<table>
+	{% for user in data %}
+	<tr>
+		<td>{{ user.first_name }} {{ user.last_name }} ({{ user.username }})</td>
+
+		<td>
+				<form action="/send-request/{{user.username}}" method="post">
+					<input type="submit" value="add as a friend">
+				</form>
+
+		</td>
+	</tr>
+
+	</div> 
+	{% endfor %}
+</table>
+{% endblock %}
+

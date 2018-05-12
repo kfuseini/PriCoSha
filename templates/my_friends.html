@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+<body>
+<h1>{{user}}'s Friend Groups</h1>
+
+
+</body>
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+
+<table>
+	<th>Group Name</th>
+	<th>Description</th>>
+
+
+{% for line in data %}
+	<tr>
+		<td>{{line.group_name}}</td>
+		<td>{{line.description}}</td>
+        <td><form action ="/delete/{{line.group_name}}" method = "Post">
+            <input type="submit" value="Delete">
+        </form></td>
+	<td><form action ="/addfriend/{{line.group_name}}" method = "Post">
+            <input type="submit" value="Add Friends">
+        </form></td>
+
+	</tr>
+{% endfor %}
+</table>
+
+
+
+
+<a href="/home">Go back</a>
+
+</html>

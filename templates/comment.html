@@ -1,0 +1,64 @@
+<html>
+<head>
+</head>
+<body>
+<h1>{{name}}</h1>
+<form action="/post_comment/{{contentid}}" method="POST">
+	<input type="text" name = "postComment" placeholder="comment" required/> </br>
+	<input type="submit" value = comment />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+	}
+</style>
+
+<table>
+	<th>Time</th>
+	<th>username</th>>
+	<th>comment</th>
+
+{% for line in comments %}
+	<tr>
+		<td>{{line.timest}}</td>
+		<td>{{line.username}}</td>
+		<td>{{line.comment_text}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+<hr>
+
+<form action="/tag/{{contentid}}" method="POST">
+	<input type="text" name = "taggee" placeholder="taggee" required/> </br>
+	<input type="submit" value = tag />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+
+<table>
+	<th>Tagger</th>
+	<th>Taggee</th>
+
+{% for line in tags %}
+	<tr>
+
+		<td>{{line.username_tagger}}</td>
+		<td>{{line.username_taggee}}</td>
+	</tr>
+
+{% endfor %}
+</table>
+
+<a href="/home">Go back</a>
+
+</body>
+
+
+</html>
